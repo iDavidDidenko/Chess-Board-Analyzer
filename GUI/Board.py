@@ -21,7 +21,8 @@ class Board:
                 color = "white" if (row + col) % 2 == 0 else "#7d7c5b"
                 tile = self.tk.Label(self.board_frame ,bg=color, width=11, height=5, cursor="hand2")
                 tile.grid(row=row, column=col, padx=0, pady=0)
-                tile.bind("<Button-1>", lambda event, r=row, c=col: self.__handleOnClick(event)) 
+                tile.bind("<Button-1>", lambda event, r=row, c=col: self.__handleAddPiece(event)) 
+                tile.bind("<Button-3>", lambda event, r=row, c=col: self.__handleRemovePiece(event))
 
     
     def setIsPieceSelected(self, flag):
@@ -30,7 +31,10 @@ class Board:
     def setHandlePiece(self, piece):
         self.__handle_piece = piece
 
-    def __handleOnClick(self, event):
+    def __handleAddPiece(self, event):
         if self.__is_piece_selected:
             event.widget.config(text=self.__handle_piece)
             # add generate a board (chess lib) then --> to stockfish engine
+    def __handleRemovePiece(self, event):
+        print("OK")
+        event.widget.config(text="") #should be with image
