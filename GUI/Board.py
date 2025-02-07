@@ -1,11 +1,11 @@
-
-
 class Board:
     board_size = 8
 
     def __init__(self, GUImanager, main_window, tk):
         self.GUImanager = GUImanager
         self.tk = tk
+
+        self.board = ['q' for _ in range(64)]
 
         self.__is_piece_selected = False
         self.__handle_piece = None
@@ -25,8 +25,8 @@ class Board:
                 tile.bind("<Button-3>", lambda event, r=row, c=col: self.__handleRemovePiece(event))
 
     
-    def setIsPieceSelected(self, flag):
-        self.__is_piece_selected = True if flag else False
+    def setIsPieceSelected(self, is_white):
+        self.__is_piece_selected = True if is_white else False
 
     def setHandlePiece(self, piece):
         self.__handle_piece = piece

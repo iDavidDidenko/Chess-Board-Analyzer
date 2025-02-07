@@ -1,13 +1,3 @@
-# from enum import Enum
-# from stockfish import Stockfish
-# import chess
-
-# # Initialize the Stockfish engine
-# stockfish = Stockfish(path="stockfish-windows-x86-64-avx2.exe")
-
-# # init chess board - after used clicked Start. 
-# # this string should be manipulated
-
 # print(str)
 # board = chess.Board.empty()
 # board.set_piece_at(0, chess.Piece.from_symbol("K"))
@@ -39,7 +29,7 @@
 
 # # stockfish.get_best_move()
 # # stockfish.set_fen_position(board.fen()
-# # stockfish.set_turn_perspective(False)
+#stockfish.set_turn_perspective(False)
 
 # # board.turn -> True if white, False if black, P for while, p for black (casesensitive)
 # # board.push_san("e2e4")
