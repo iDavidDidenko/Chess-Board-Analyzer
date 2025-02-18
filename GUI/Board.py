@@ -21,8 +21,8 @@ class Board:
                 color = "white" if (row + col) % 2 == 0 else "#7d7c5b"
                 tile = self.tk.Label(self.board_frame ,bg=color, width=11, height=5, cursor="hand2")
                 tile.grid(row=row, column=col, padx=0, pady=0)
-                tile.bind("<Button-1>", lambda event, r=row, c=col: self.__handleAddPiece(event)) 
-                tile.bind("<Button-3>", lambda event, r=row, c=col: self.__handleRemovePiece(event))
+                tile.bind("<Button-1>", lambda event, r=row, c=col: self.__handleAddPiece(event, r, c)) 
+                tile.bind("<Button-3>", lambda event, r=row, c=col: self.__handleRemovePiece(event, r, c))
 
     
     def setIsPieceSelected(self, is_white):
@@ -31,10 +31,20 @@ class Board:
     def setHandlePiece(self, piece):
         self.__handle_piece = piece
 
-    def __handleAddPiece(self, event):
+    def __handleAddPiece(self, event, row, col):
         if self.__is_piece_selected:
             event.widget.config(text=self.__handle_piece)
-            # add generate a board (chess lib) then --> to stockfish engine
-    def __handleRemovePiece(self, event):
+            # write a formula to convert it from Row and Col (8x8) for 0 to 64 value
+            index = self.__convert_tile_position(row, col)
+            self.GUImanager.Controller.logic_board.set_piece(index, self.__handle_piece)
+
+         
+    def __handleRemovePiece(self, event, row, col):
         print("OK")
-        event.widget.config(text="") #should be with image
+        index1 = self.__convert_tile_position(row, col)
+        self.GUImanager.Controller.logic_board.remove_piece(index1)
+        event.widget.config(text="") #should be with image TODO:
+
+    def __convert_tile_position(self, row, col) -> int:
+        return row * self.board_size + col
+

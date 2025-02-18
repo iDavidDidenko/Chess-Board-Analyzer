@@ -27,23 +27,19 @@ class Pieces:
         self.__createPiecesOnGrid(self.black_pieces, black_collection)  
 
     def __createPiecesOnGrid(self, frame, pieace):
-        i = 0
-        j = 0
+        base_dir = self.os.path.abspath(self.os.path.dirname(__file__))
+        
         for i, piece in enumerate(pieace):
-            if i % 3 == 0:
-                j += 1
-                z = 0
+            j = (i // 3) + 1  # Row 
+            z = i % 3          # Col 
 
-            base_dir = self.os.path.abspath(self.os.path.dirname(__file__))
             image_path = self.os.path.join(base_dir, "..", "Images", "White" if piece.isupper() else "Black", f"{piece}.png")
-            
             img = self.tk.PhotoImage(file=image_path)
-  
-            tile = self.tk.Label(frame, image=img, bg="white", width=50, height=50, cursor="hand2")
-            tile.image = img 
-            tile.bind("<Button-1>", lambda event, piece=piece: self.__handleOnClick(event, piece))            
-            tile.grid(row=j, column=z, padx=0, pady=0)  
-            z += 1  
+
+            tile = self.tk.Label(frame, image=img, bg="white", width=55, height=55, cursor="hand2")
+            tile.image = img  # Prevent garbage collection
+            tile.bind("<Button-1>", lambda event, p=piece: self.__handleOnClick(event, p))  # Avoid late binding
+            tile.grid(row=j, column=z, padx=0, pady=0) 
 
     # TODO:
     # send also 'even' to extract image and pass to 
@@ -58,9 +54,5 @@ class Pieces:
         elif event.widget.cget("bg") == "green":
             event.widget.config(bg="white")
             self.__is_tile_selected = False
-            self.GUImanager.Board.setIsPieceSelected(False)
-            self.GUImanager.Board.setHandlePiece(None)
-
-             
-
-            
+            # self.GUImanager.Board.setIsPieceSelected(False)
+            # self.GUImanager.Board.setHandlePiece(None)

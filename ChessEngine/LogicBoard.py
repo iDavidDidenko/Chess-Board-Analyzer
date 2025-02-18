@@ -27,8 +27,19 @@ class LogicBoard:
             raise TypeError("LogicBoard - is_white must be a boolean.")
         self.board.turn = is_white
 
-    def get_board(self) -> str:
+    def get_fen(self) -> str:
         if self.board is None:
             raise ValueError("LogicBoard - Board is not initialized...")
         return self.board.fen()  
-            
+
+    def get_turn(self) -> str:
+        return self.board.turn
+    
+    def set_turn(self, bool : bool):
+        self.board.turn = bool
+
+    def remove_piece(self, tile: int):
+        self.board.remove_piece_at(tile)
+
+
+

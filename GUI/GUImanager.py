@@ -20,13 +20,13 @@ class GUImanager:
         self.Pieces = Pieces(self, self.main_window, tk, Image, os)
 
     def set_white_turn(self):
-        self.Controller.set_white_turn()
+        self. Controller.set_white_turn()
 
     def set_black_turn(self):
         self.Controller.set_black_turn()
 
     def analyze_btn(self):
-        self.Controller.analayzer(self.Board.board)
+        self.Controller.analayzer()
         print("analyze btn clicked")
 
     def reset_btn(self):
